@@ -1,0 +1,30 @@
+{
+  "name": "validation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "e2e": "jest --config=jest.e2e.config.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nestjs/class-validator": "^0.13.4",
+    "@nestjs/swagger": "^7.3.1",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.4",
+    "esbuild": "^0.20.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-patch": "^3.1.2",
+    "ttsc": "^0.3.1",
+    "ttypescript": "^1.5.15"
+  },
+  "dependencies": {
+    "@nestjs/class-transformer": "^0.4.0",
+    "lodash": "^4.17.21",
+    "reflect-metadata": "^0.2.2",
+    "typescript": "^5.4.4"
+  }
+}
