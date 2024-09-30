@@ -1,5 +1,7 @@
 import { IsArray, IsBoolean, IsNumber, IsOptional, IsString, ValidationOptions } from "@nestjs/class-validator";
 import * as ts from "typescript";
+import * as fs from "node:fs";
+import { logInfo } from "../utils/ast-utils";
 
 const CLASS_VALIDATOR_NAMESPACE = "class_validator";
 const CLASS_VALIDATOR_PACKAGE = "@nestjs/class-validator";
