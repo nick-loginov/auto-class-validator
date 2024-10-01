@@ -28,15 +28,6 @@ export function isBoolean(type: ts.Type) {
 export const before = (options?: Record<string, any>, program?: ts.Program) => {
     return (ctx: ts.TransformationContext): ts.Transformer<any> => {
         return (sf: ts.SourceFile) => {
-            // logInfo(sf.fileName);
-            // logInfo(sf.getFullText());
-            // const visitor = (node: ts.Node): ts.Node => {
-            //     logInfo(node.kind, `\t# ts.SyntaxKind.${ts.SyntaxKind[node.kind]}`);
-            //     return ts.visitEachChild(node, visitor, ctx);
-            // };
-            
-            // return ts.visitNode(sf, visitor);
-            
             if (!isFilenameMatched([".dto"], sf.fileName)) {
                 return sf;
             }
