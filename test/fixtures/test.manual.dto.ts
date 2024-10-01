@@ -1,7 +1,10 @@
-import { IsBoolean, IsNumber, IsOptional, IsString } from "@nestjs/class-validator";
+import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from "@nestjs/class-validator";
 
 export class SubTestDto {
+    @IsString()
     field: string;
+
+    @IsNumber()
     number: number;
 }
 
@@ -23,7 +26,10 @@ export class TestDto {
     @IsBoolean()
     boolean: boolean;
 
+    @IsArray()
+    @IsNumber()
     array: number[];
     object: SubTestDto;
+    @IsArray()
     listSub: SubTestDto[];
 }

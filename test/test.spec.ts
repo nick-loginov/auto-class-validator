@@ -6,11 +6,13 @@ import * as path from "node:path";
 import "reflect-metadata";
 import * as ts from "typescript";
 import { before } from "../lib/plugin/before";
+import { before as beforeSwagger } from "@nestjs/swagger/dist/plugin"
 
-describe("test before", () =>{
+describe("test before", () => {
     it("test dto", () => {
         const options: ts.CompilerOptions = {
-            experimentalDecorators: true
+            experimentalDecorators: true,
+            emitDecoratorMetadata: true
         };
         const filenameInput = path.join(__dirname, "fixtures", "test.dto.ts");
         // const manualFilenameInput = path.join(__dirname, "fixtures", "test.manual.dto.ts");
@@ -30,11 +32,12 @@ describe("test before", () =>{
                 before(
                   { controllerKeyOfComment: 'summary', introspectComments: true },
                   fakeProgram
-                )
+                ),
+                beforeSwagger({}, fakeProgram)
               ]
             }
         });
-
+        
         fs.writeFileSync(filenameOutput, result.outputText);
 
         expect(result.outputText).toEqual(fileTarget);

@@ -1,7 +1,6 @@
-import { IsArray, IsBoolean, IsNumber, IsOptional, IsString, ValidationOptions } from "@nestjs/class-validator";
+import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from "@nestjs/class-validator";
+import "reflect-metadata";
 import * as ts from "typescript";
-import * as fs from "node:fs";
-import { logInfo } from "../utils/ast-utils";
 
 const CLASS_VALIDATOR_NAMESPACE = "class_validator";
 const CLASS_VALIDATOR_PACKAGE = "@nestjs/class-validator";
@@ -29,6 +28,15 @@ export function isBoolean(type: ts.Type) {
 export const before = (options?: Record<string, any>, program?: ts.Program) => {
     return (ctx: ts.TransformationContext): ts.Transformer<any> => {
         return (sf: ts.SourceFile) => {
+            // logInfo(sf.fileName);
+            // logInfo(sf.getFullText());
+            // const visitor = (node: ts.Node): ts.Node => {
+            //     logInfo(node.kind, `\t# ts.SyntaxKind.${ts.SyntaxKind[node.kind]}`);
+            //     return ts.visitEachChild(node, visitor, ctx);
+            // };
+            
+            // return ts.visitNode(sf, visitor);
+            
             if (!isFilenameMatched([".dto"], sf.fileName)) {
                 return sf;
             }
@@ -153,14 +161,18 @@ export const before = (options?: Record<string, any>, program?: ts.Program) => {
                     )
                 }
 
-                return factory.updatePropertyDeclaration(
+                // TODO: for some reason parents are reseted after update, fix it later
+                const returnNode = factory.updatePropertyDeclaration(
                     node,
                     [...updatedDecorators, ...modifiers],
                     node.name,
                     node.questionToken,
                     node.type,
                     node.initializer
-                )
+                ); 
+                (returnNode as any).parent = node.parent;
+
+                return returnNode;
             }
 
             const visitPropertyNode = (node: ts.Node): ts.Node => {
