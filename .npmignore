@@ -1,0 +1,8 @@
+e2e
+test
+jest.config.json
+jest.e2e.config.json
+tsconfig.build.json
+tsconfig.json
+.gitignore
+

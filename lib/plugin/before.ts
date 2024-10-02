@@ -1,4 +1,5 @@
-import { IsArray, IsBoolean, IsNumber, IsOptional, IsString, ValidationOptions } from "@nestjs/class-validator";
+import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from "@nestjs/class-validator";
+import "reflect-metadata";
 import * as ts from "typescript";
 
 const CLASS_VALIDATOR_NAMESPACE = "class_validator";
@@ -151,14 +152,18 @@ export const before = (options?: Record<string, any>, program?: ts.Program) => {
                     )
                 }
 
-                return factory.updatePropertyDeclaration(
+                // TODO: for some reason parents are reseted after update, fix it later
+                const returnNode = factory.updatePropertyDeclaration(
                     node,
                     [...updatedDecorators, ...modifiers],
                     node.name,
                     node.questionToken,
                     node.type,
                     node.initializer
-                )
+                ); 
+                (returnNode as any).parent = node.parent;
+
+                return returnNode;
             }
 
             const visitPropertyNode = (node: ts.Node): ts.Node => {
