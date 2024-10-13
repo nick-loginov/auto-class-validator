@@ -1,7 +1,13 @@
 {
   "name": "auto-class-validator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Automatic class-validator integration via typescript transformers, use it with @nestjs/swagger for better experience ",
+  "keywords": ["class-validator", "nestjs", "validation", "validator", "automatic"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nick-loginov/auto-class-validator"
+  },
+  "types": "dist/index.d.ts",
   "files": [
     "./dist/**"
   ],
