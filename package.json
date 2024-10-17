@@ -1,6 +1,6 @@
 {
   "name": "auto-class-validator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Automatic class-validator integration via typescript transformers, use it with @nestjs/swagger for better experience ",
   "keywords": [
     "class-validator",
